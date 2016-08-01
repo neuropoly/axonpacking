@@ -1,9 +1,9 @@
 
 # Disks Close Random Packing - Application to the White Matter simulation
 
-author : Tom Mingasson //   
-contact : tom.mingasson@eleves.ec-nantes.fr //  
-institution : University Polytechnique of Montreal, NeuroPoly //  
+author : Tom Mingasson    
+contact : tom.mingasson@eleves.ec-nantes.fr 
+institution : University Polytechnique of Montreal, NeuroPoly   
 date : 2016 
 
 ## Description 
@@ -20,11 +20,11 @@ g-ratio.
 
 ## Scripts
 
-main.m 
-axonsSetup.m 
+main.m
+axonsSetup.m
 processPacking.m
-computeStatistics.m 
-progressBar.m 
+computeStatistics.m
+progressBar.m
 
 ## How to use it ?
 
@@ -40,7 +40,7 @@ In ‘main.m’ change the inputs
 - ITERmax 	: number of migrations to perform in the packing process.
 
 #### Help 	
-ITERmax = 5000 enough if N = 2000 axons 
+ITERmax = 5000 enough if N = 2000 axons
 ITERmax = 2000 enough if N = 1000 axons
 
 #### Example  	
