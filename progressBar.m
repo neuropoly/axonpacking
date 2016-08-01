@@ -1,4 +1,4 @@
-classdef ProgressBar < handle
+classdef progressBar < handle
 % author : Alessandro Daducci 
 
 properties
@@ -13,7 +13,7 @@ methods
     % ===========================
     % Initialize the progress bar
     % ===========================
-	function obj = ProgressBar( N )
+	function obj = progressBar( N )
         obj.width = 25;
         obj.i     = 1;
         obj.N     = N;

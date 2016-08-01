@@ -10,7 +10,7 @@ KrepMULT = 1.5;
 Krep = KrepMULT*Kcenter0;          % repulsion step coeff for disks with overlapping
 PowerRep = 0.5;                    % repulsion power for disks with overlapping
 
-progress = ProgressBar(ITERmax);
+progress = progressBar(ITERmax);
 
 for iter=1:ITERmax
     
