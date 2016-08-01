@@ -2,7 +2,7 @@
 # Disks Close Random Packing - Application to the White Matter simulation
 
 author : Tom Mingasson    
-contact : tom.mingasson@eleves.ec-nantes.fr 
+contact : tom.mingasson@eleves.ec-nantes.fr          
 institution : University Polytechnique of Montreal, NeuroPoly   
 date : 2016 
 
