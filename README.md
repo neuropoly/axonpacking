@@ -40,8 +40,7 @@ In ‘main.m’ change the inputs
 - ITERmax 	: number of migrations to perform in the packing process.
 
 #### Help 	
-ITERmax = 5000 enough if N = 2000 axons            
-ITERmax = 2000 enough if N = 1000 axons
+ITERmax = 2500 enough if N = 2000 axons            
 
 #### Example  	
 nbAxons = 1000;                                       

@@ -9,13 +9,13 @@ addpath('... path for other scripts ...')
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CHANGE BELOW : AXONS FEATURES and ITERmax
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-nbAxons = 50;                                       % number of axons
+nbAxons = 1000;                                       % number of axons
 meanTheo = [3 3.5]; Lm = length(meanTheo);          % theoretical mean of axon diameters in um
 varTheo = [1 1];                                    % theoretical variances of axon diameters in um
 threshold = 10;                                     % no radii above 'threshold'
 gapTheo = [0 0.3];                                  % gap between axons in um 
 g_ratio = 0.72;                                     % g ratio
-ITERmax = 2000;                                     % ITERmax = 5000 ok if N = 2000 //  ITERmax = 2000 ok if N = 1000 
+ITERmax = 2500;                                     % ITERmax = 2500 ok if N = 1000
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
