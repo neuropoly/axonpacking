@@ -1,5 +1,5 @@
 
-# Disks Close Random Packing - Application to the White Matter simulation
+# AxonPack - Application to the simulation of White Matter microstructure
 
 author : Tom Mingasson    
 contact : tom.mingasson@eleves.ec-nantes.fr          
