@@ -9,7 +9,7 @@ clc
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CHANGE BELOW : AXONS FEATURES and ITERmax
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-numberAxons = 1000;                                           % number of axons
+numberAxons = 25;                                           % number of axons
 mean_theoretical = [3 3]; Lm = length(mean_theoretical);     % theoretical mean of axon radii in um
 var_theoretical  = [1 1];                                    % theoretical variances of axon radii in um
 gap_theoretical  = [0 0.5];                                  % gap between axons in um 
