@@ -55,7 +55,8 @@ for n=1:N-1
     
 end
 
-set( figure ,'WindowStyle','docked' ); clf
+figure('Name','Disk diameter histogram')
+hold off
 xth = linspace(0.01,xmax,1000);
 yth = pobj(xth, axons,lawName, k);
 [n_hist,bins]=hist(x(1:n),axe_hist);
