@@ -9,7 +9,7 @@ clc
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CHANGE BELOW : AXONS FEATURES and ITERmax
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-numberAxons = 25;                                           % number of axons
+numberAxons = 25;                                            % number of axons
 mean_theoretical = [3 3]; Lm = length(mean_theoretical);     % theoretical mean of axon radii in um
 var_theoretical  = [1 1];                                    % theoretical variances of axon radii in um
 gap_theoretical  = [0 0.5];                                  % gap between axons in um 
@@ -50,12 +50,12 @@ for k=1:Lm
     [FVF, FR, MVF, AVF, g_ratio] = computeStatistics(axons.diameters{k}, axons.gap_theoretical{k}, packing.finalPositions{k}, packing.side{k}, resolution);
     
     % results
-    statistics.resolution{k} = resolution;
-    statistics.FVF{k}        = FVF;
-    statistics.FR{k}         = FR;
-    statistics.MVF{k}        = MVF;
-    statistics.AVF{k}        = AVF;
-    statistics.g_ratio{k}    = g_ratio;
+    stats.resolution{k} = resolution;
+    stats.FVF{k}        = FVF;
+    stats.FR{k}         = FR;
+    stats.MVF{k}        = MVF;
+    stats.AVF{k}        = AVF;
+    stats.g_ratio{k}    = g_ratio;
 
     %% Display
     % display the packing with results annotations for FVF and Fr
@@ -87,8 +87,7 @@ end
 % cd(['... path ...',saveName])
 % save('axons.mat', '-struct', 'axons');
 % save('packing.mat', '-struct', 'packing');
-% save('optimization.mat', '-struct', 'optimization');
-% save('statistics.mat', '-struct', 'statistics');
+% save('stats.mat', '-struct', 'statistics');
 
 
 
