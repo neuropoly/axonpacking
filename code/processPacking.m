@@ -14,13 +14,10 @@ for iter=1:ITERmax
         % compute FVF
         [FVF,~,~,~,g_ratio] = computeStatistics(D, gap,  reshape(x,2,length(x)/2), side, 2048);
         FVF_historic = [FVF_historic, FVF];
-        set(figure(200) ,'WindowStyle','docked' ); clf
-        plot(FVF_historic.*linspace(1,length(FVF_historic), length(FVF_historic)), FVF_historic, 'r*-')
-        legend('FVF')
-        drawnow
       
         % display intermediate packing
-        set(figure(201) ,'WindowStyle','docked' ); clf
+        set(figure(201), 'Name', 'Disk migration'); clf
+        subplot(1,2,1)
         pts = reshape(x,2,length(x)/2);
         t = 0:.1:2*pi+0.1;
         for i=1:N
@@ -31,6 +28,11 @@ for iter=1:ITERmax
             title({['Diameter Mean : ',num2str(mean(D(:))),' µm    ','Diameter Variance : ',num2str(var(D(:))),' µm    ','Gap : ',num2str(gap),' µm    '] ...
                 ;['iteration : ',num2str(iter) ]} ,'FontSize',10,'FontWeight','bold');
         end
+        axis square
+
+        subplot(1,2,2)
+        plot([1:length(FVF_historic)]*ITERfvf, FVF_historic, 'r*-')
+        legend('FVF')
         drawnow
         
     end
