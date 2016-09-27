@@ -6,7 +6,7 @@ contact : tom.mingasson@eleves.ec-nantes.fr
 institution : University Polytechnique of Montreal, NeuroPoly   
 date : 2016 
 
-<img src="https://github.com/vherman3/AxonSegmentation/blob/master/doc/schema.jpg" width="600px" align="middle" />
+<img src="https://github.com/neuropoly/axonpacking/blob/master/img1.jpeg" width="600px" align="middle" />
 
 ## Description 
 
@@ -18,6 +18,8 @@ The different steps to process packing are the following: first, the diameters o
 
 
 The software packing provides microstructure features (Fiber Volume Fraction FVF, Myelin Volume Fraction MVF, Axon Volume Fraction AVF, fraction restricted FR).
+
+<img src="https://github.com/neuropoly/axonpacking/blob/master/img2.jpeg" width="600px" align="middle" />
 
 ## Scripts
 
