@@ -10,9 +10,9 @@ Ls = sqrt(sum(pi*(D+gap/2).^2))*(4/5);
 g =  compute_gratio(D);
 
 % masks
-Xmin = round((mean(pts(1,:)) - Ls/2) * resolution/side);
+Xmin = max(1,round((mean(pts(1,:)) - Ls/2) * resolution/side));
 Xmax = round((mean(pts(1,:)) + Ls/2) * resolution/side);
-Ymin = round((mean(pts(2,:)) - Ls/2) * resolution/side);
+Ymin = max(1,round((mean(pts(2,:)) - Ls/2) * resolution/side));
 Ymax = round((mean(pts(2,:)) + Ls/2) * resolution/side);
 
 % mask1 : axon + myelin mask

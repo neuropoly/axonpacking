@@ -12,25 +12,40 @@ for iter=1:ITERmax
     if round(iter/ITERfvf)==iter/ITERfvf | iter==1
 
         % compute FVF
-        [FVF,~,~,~,g_ratio] = computeStatistics(D, gap,  reshape(x,2,length(x)/2), side, 2048);
-        FVF_historic = [FVF_historic, FVF];
-        set(figure(200) ,'WindowStyle','docked' ); clf
-        plot(FVF_historic.*linspace(1,length(FVF_historic), length(FVF_historic)), FVF_historic, 'r*-')
-        legend('FVF')
-        drawnow
+        %[FVF,~,~,~,g_ratio] = computeStatistics(D, gap,  reshape(x,2,length(x)/2), side, 2048);
+        g_ratio=compute_gratio(D);
       
         % display intermediate packing
-        set(figure(201) ,'WindowStyle','docked' ); clf
+        set(figure(201), 'Name', 'Disk migration'); clf
+        subplot(1,2,1)
         pts = reshape(x,2,length(x)/2);
         t = 0:.1:2*pi+0.1;
         for i=1:N
             patch(D(i)*cos(t) + pts(1,i), D(i)*sin(t) + pts(2,i), 'k', 'EdgeColor', 'k');
+        end
+        
+        
+        masksize = ceil(2048*sqrt(N)/sqrt(500));
+        FVF_mask = false(masksize);
+        for id=1:N
+            Xfibers = D(id)*cos(t) + pts(1,id);
+            Yfibers = D(id)*sin(t) + pts(2,id);
+            FVF_mask = FVF_mask | poly2mask(Xfibers/side*masksize, Yfibers/side*masksize, masksize, masksize);
+        end
+        FVF_historic = [FVF_historic sum(FVF_mask(:))/masksize/masksize];
+
+        for i=1:N
             patch(g_ratio(i)*D(i)*cos(t) + pts(1,i), g_ratio(i)*D(i)*sin(t) + pts(2,i), 'w', 'EdgeColor', 'k');
             xlim([0 side])
             ylim([0 side])
             title({['Diameter Mean : ',num2str(mean(D(:))),' µm    ','Diameter Variance : ',num2str(var(D(:))),' µm    ','Gap : ',num2str(gap),' µm    '] ...
                 ;['iteration : ',num2str(iter) ]} ,'FontSize',10,'FontWeight','bold');
         end
+        axis square
+        
+        subplot(1,2,2)
+        plot([1:length(FVF_historic)]*ITERfvf, FVF_historic, 'r*-')
+        legend('FVF')
         drawnow
         
     end
@@ -146,3 +161,15 @@ else
     numberOfPoints = 2;
 end
 end
+
+function gratio = compute_gratio(R)
+
+% Ikeda M, Oka Y. Brain Behav, 2012. "The relationship between nerve conduction velocity and fiber morphology during peripheral nerve regeneration."
+gratio = 0.220 .* log10(2*R) + 0.508;
+% g = 0.76; % if you want a constant g-ratio
+
+% figure
+% plot(2.*R, g)
+
+end
+

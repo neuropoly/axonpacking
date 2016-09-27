@@ -9,18 +9,17 @@ clc
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CHANGE BELOW : AXONS FEATURES and ITERmax
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-numberAxons = 25;                                            % number of axons
-mean_theoretical = [3 3]; Lm = length(mean_theoretical);     % theoretical mean of axon radii in um
-var_theoretical  = [1 1];                                    % theoretical variances of axon radii in um
-gap_theoretical  = [0 0.5];                                  % gap between axons in um 
+numberAxons = 50;                                            % number of axons
+mean_theoretical = 3;                                        % theoretical mean of axon radii in um
+var_theoretical  = 1;                                        % theoretical variances of axon radii in um
+gap_theoretical  = 0.1;                                        % gap between axons in um 
 threshold_high = 10;                                         % no diameter above 'threshold_high'
 threshold_low = 0.2;                                         % no diameter under 'threshold_low'
-ITERmax = 30000;                                             % number of iteration i.e migrations to perform. Example: ITERmax = 30000 ok if N = 1000
-ITERfvf = 1000;                                              % the disk density i.e Fiber Volume Fraction (FVF) is computed and displayed every 'ITERfvf' iterations
+ITERmax = 3000;                                             % number of iteration i.e migrations to perform. Example: ITERmax = 30000 ok if N = 1000
+ITERfvf = 100;                                              % the disk density i.e Fiber Volume Fraction (FVF) is computed and displayed every 'ITERfvf' iterations
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-for k=1:Lm
+for k=1:length(mean_theoretical)
     %% Process Packing
     % axons features
     axons.mean_theoretical{k} = mean_theoretical(k);
@@ -57,21 +56,6 @@ for k=1:Lm
     stats.AVF{k}        = AVF;
     stats.g_ratio{k}    = g_ratio;
 
-    %% Display
-    % display the packing with results annotations for FVF and Fr
-    set( figure ,'WindowStyle','docked' ); clf
-    t = 0:.1:2*pi+0.1;
-    for i=1:numberAxons
-        title(['Diameter Mean : ',num2str(mean(D(:))),' µm    ','Diameter Variance : ',num2str(var(D(:))),' µm    ','Gap : ',num2str(gap_theoretical(k)),' µm    '],'FontSize',10,'FontWeight','bold');
-        patch(D(i)*cos(t) + finalPositions(1,i), D(i)*sin(t) + finalPositions(2,i), [.5 .5 1], 'FaceAlpha', 0.4, 'EdgeColor', [.2 .2 1]);
-        xlim([0 side])
-        ylim([0 side])
-    end
-    strPHI = [ 'Phi = ', num2str(roundn(PHI,-4))];
-    strFR =  [ 'Fr = ',  num2str(roundn(FR,-4))];
-    str = {strPHI, strFR};
-    annotation('textbox','String',str,'FontSize',10, 'HorizontalAlignment','center','LineStyle','none','BackgroundColor',[1 1 1]);
-    drawnow
     
 end
 
