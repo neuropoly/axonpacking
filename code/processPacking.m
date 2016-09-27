@@ -35,7 +35,7 @@ for iter=1:ITERmax
         FVF_historic = [FVF_historic sum(FVF_mask(:))/masksize/masksize];
 
         for i=1:N
-            %patch(g_ratio(i)*D(i)*cos(t) + pts(1,i), g_ratio(i)*D(i)*sin(t) + pts(2,i), 'w', 'EdgeColor', 'k');
+            patch(g_ratio(i)*D(i)*cos(t) + pts(1,i), g_ratio(i)*D(i)*sin(t) + pts(2,i), 'w', 'EdgeColor', 'k');
             xlim([0 side])
             ylim([0 side])
             title({['Diameter Mean : ',num2str(mean(D(:))),' µm    ','Diameter Variance : ',num2str(var(D(:))),' µm    ','Gap : ',num2str(gap),' µm    '] ...
