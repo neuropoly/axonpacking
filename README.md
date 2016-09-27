@@ -6,7 +6,7 @@ contact : tom.mingasson@eleves.ec-nantes.fr
 institution : University Polytechnique of Montreal, NeuroPoly   
 date : 2016 
 
-<img src="https://github.com/neuropoly/axonpacking/blob/master/img1.jpeg" width="400px" align="middle" />
+<img src="https://github.com/neuropoly/axonpacking/blob/master/img1.jpeg" width="600px" align="center" />
 
 ## Description 
 
