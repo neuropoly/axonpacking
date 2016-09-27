@@ -15,8 +15,8 @@ var_theoretical  = 1;                                        % theoretical varia
 gap_theoretical  = 0.1;                                        % gap between axons in um 
 threshold_high = 10;                                         % no diameter above 'threshold_high'
 threshold_low = 0.2;                                         % no diameter under 'threshold_low'
-ITERmax = 5000;                                             % number of iteration i.e migrations to perform. Example: ITERmax = 30000 ok if N = 1000
-ITERfvf = 500;                                              % the disk density i.e Fiber Volume Fraction (FVF) is computed and displayed every 'ITERfvf' iterations
+ITERmax = 3000;                                             % number of iteration i.e migrations to perform. Example: ITERmax = 30000 ok if N = 1000
+ITERfvf = 100;                                              % the disk density i.e Fiber Volume Fraction (FVF) is computed and displayed every 'ITERfvf' iterations
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 for k=1:length(mean_theoretical)
