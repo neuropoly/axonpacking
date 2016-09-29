@@ -8,50 +8,59 @@ x = x0;
 progress = progressBar(ITERmax);
 
 for iter=1:ITERmax
- 
+    
+    MyGrad = computeGrad(x, D+gap/2, side);
+    x = x + MyGrad;
+    
     if round(iter/ITERfvf)==iter/ITERfvf | iter==1
-
-        % compute FVF
-        %[FVF,~,~,~,g_ratio] = computeStatistics(D, gap,  reshape(x,2,length(x)/2), side, 2048);
-        g_ratio=compute_gratio(D);
-      
-        % display intermediate packing
-        set(figure(201), 'Name', 'Disk migration'); clf
-        subplot(1,2,1)
+        
         pts = reshape(x,2,length(x)/2);
         t = 0:.1:2*pi+0.1;
-        for i=1:N
-            patch(D(i)*cos(t) + pts(1,i), D(i)*sin(t) + pts(2,i), 'k', 'EdgeColor', 'k');
-        end
         
-        
-        masksize = ceil(2048*sqrt(N)/sqrt(500));
+        % FVF mask
+        masksize = ceil(3000*sqrt(N)/sqrt(500));
         FVF_mask = false(masksize);
         for id=1:N
             Xfibers = D(id)*cos(t) + pts(1,id);
             Yfibers = D(id)*sin(t) + pts(2,id);
             FVF_mask = FVF_mask | poly2mask(Xfibers/side*masksize, Yfibers/side*masksize, masksize, masksize);
         end
-        FVF_historic = [FVF_historic sum(FVF_mask(:))/masksize/masksize];
-
-        for i=1:N
-            patch(g_ratio(i)*D(i)*cos(t) + pts(1,i), g_ratio(i)*D(i)*sin(t) + pts(2,i), 'w', 'EdgeColor', 'k');
-            xlim([0 side])
-            ylim([0 side])
-            title({['Diameter Mean : ',num2str(mean(D(:))),' µm    ','Diameter Variance : ',num2str(var(D(:))),' µm    ','Gap : ',num2str(gap),' µm    '] ...
-                ;['iteration : ',num2str(iter) ]} ,'FontSize',10,'FontWeight','bold');
+        
+        % AVF mask
+        AVF_mask = false(masksize);
+        g_ratio=compute_gratio(D);
+        for id=1:N
+            Xaxons = g_ratio(id)*D(id)*cos(t) + pts(1,id);
+            Yaxons = g_ratio(id)*D(id)*sin(t) + pts(2,id);
+            AVF_mask = AVF_mask | poly2mask(Xaxons/side*masksize, Yaxons/side*masksize, masksize, masksize);
         end
+        
+        Ls = sqrt(sum(pi*(D+gap/2).^2))*(4/5)/side*masksize;
+        Xmin = round(mean(pts(1,:))/side*masksize - Ls/2);
+        Xmax = round(mean(pts(1,:))/side*masksize + Ls/2);
+        Ymin = round(mean(pts(2,:))/side*masksize - Ls/2);
+        Ymax = round(mean(pts(2,:))/side*masksize + Ls/2);
+        FVF_mask_trunc = FVF_mask(Xmin:Xmax,Ymin:Ymax);
+        
+        FVF_historic = [FVF_historic sum(FVF_mask_trunc(:))/(Ls*Ls)];
+        
+        % display intermediate packing and compute FVF
+        set(figure(201), 'Name', 'Disk migration'); clf
+        subplot(1,2,1)
+        colormap(gray)
+        imagesc(AVF_mask - FVF_mask)
+        axis off
+        hold on
+        rectangle('Position',[Xmin, Ymin, Ls, Ls],'EdgeColor', 'r', 'LineWidth', 1.5)
+        title(['Diam Mean : ',num2str(roundn(mean(D(:)),-1)),' µm    ','Diam Var : ',num2str(roundn(var(D(:)),-1)),' µm    ','Gap : ',num2str(gap),' µm    '],'FontSize',10,'FontWeight','bold');
         axis square
         
         subplot(1,2,2)
         plot([1:length(FVF_historic)]*ITERfvf, FVF_historic, 'r*-')
-        legend('FVF')
-        drawnow
-        
+        title('Disk density in the red square' ,'FontSize',10,'FontWeight','bold');
+        axis square
+
     end
-    
-    MyGrad = computeGrad(x, D+gap/2, side);
-    x = x + MyGrad;
     
     progress.update();
     
@@ -61,7 +70,7 @@ progress.close();
 
 finalPositions = reshape(x,2,length(x)/2);
 
-% evaluate overlap in the packing
+% evaluate overlap in the final packing
 overlap = 0;
 for i = 1:N-1
     for j = i+1:N
@@ -87,7 +96,7 @@ N=size(pts,2);
 P = squareform(pdist(pts','euclidean'))+eye(N);
 Rsum = (repmat(D,1,N)' + repmat(D,1,N)).*(tril(ones(N,N),-1)+triu(ones(N,N),1));
 L = (Rsum./P-1); % >0 if intersection
-Lbin = L; Lbin(Lbin>0) = 1; Lbin(Lbin<=0) = 0;  F = floor(linspace(1,N+1,2*N+1)); F=F(1:end-1); Lbin2 = Lbin(:,F); 
+Lbin = L; Lbin(Lbin>0) = 1; Lbin(Lbin<=0) = 0;  F = floor(linspace(1,N+1,2*N+1)); F=F(1:end-1); Lbin2 = Lbin(:,F);
 inter1_index = repmat(sum(Lbin),2,1); inter1_index(inter1_index>0)=1;   % disks that overlap
 inter0_index = 1 - inter1_index;                                        % disks that NOT overlap
 
@@ -98,9 +107,9 @@ attraction = pts_centered./repmat(attraction_norm,[2,1]);
 
 % repulsion
 U = repmat(x',N,1)-repmat(pts',1,N);
-Usum  = sum(U.*Lbin2,1); 
+Usum  = sum(U.*Lbin2,1);
 Unorm = sqrt(Usum(1:2:end).^2 + Usum(2:2:end).^2); Unorm(Unorm==0) = 1;
-Unormalization = repmat(Unorm,2,1); Unormalization = Unormalization(:)'; 
+Unormalization = repmat(Unorm,2,1); Unormalization = Unormalization(:)';
 Usum_normed = Usum./Unormalization ;
 repulsion = (Usum_normed.*inter1_index(:)')';
 
@@ -166,6 +175,7 @@ function gratio = compute_gratio(R)
 
 % Ikeda M, Oka Y. Brain Behav, 2012. "The relationship between nerve conduction velocity and fiber morphology during peripheral nerve regeneration."
 gratio = 0.220 .* log10(2*R) + 0.508;
+
 % g = 0.76; % if you want a constant g-ratio
 
 % figure

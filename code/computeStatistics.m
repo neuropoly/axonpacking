@@ -6,41 +6,52 @@ function [FVF, FR, MVF, AVF, g] = computeStatistics( D, gap, pts, side, resoluti
 %       - FR  : the fraction of restricted water
 
 N = length(D);
-Ls = sqrt(sum(pi*(D+gap/2).^2))*(4/5);
 g =  compute_gratio(D);
+t = 0:.1:2*pi+0.1;
 
-% masks
-Xmin = max(1,round((mean(pts(1,:)) - Ls/2) * resolution/side));
-Xmax = round((mean(pts(1,:)) + Ls/2) * resolution/side);
-Ymin = max(1,round((mean(pts(2,:)) - Ls/2) * resolution/side));
-Ymax = round((mean(pts(2,:)) + Ls/2) * resolution/side);
+% FVF mask
+masksize = ceil(resolution*sqrt(N)/sqrt(500));
+FVF_mask = false(masksize);
+for id=1:N
+    Xfibers = D(id)*cos(t) + pts(1,id);
+    Yfibers = D(id)*sin(t) + pts(2,id);
+    FVF_mask = FVF_mask | poly2mask(Xfibers/side*masksize, Yfibers/side*masksize, masksize, masksize);
+end
 
-% mask1 : axon + myelin mask
-mask1 = createCirclesMask(pts', D, side, resolution); mask1=double(mask1);
-mask_trunc1 = mask1(Xmin:Xmax,Ymin:Ymax);
-area1 = length(find(mask_trunc1==1));
-area0 = length(find(mask_trunc1==0));
+% AVF mask
+AVF_mask = false(masksize);
+g_ratio=compute_gratio(D);
+for id=1:N
+    Xaxons = g_ratio(id)*D(id)*cos(t) + pts(1,id);
+    Yaxons = g_ratio(id)*D(id)*sin(t) + pts(2,id);
+    AVF_mask = AVF_mask | poly2mask(Xaxons/side*masksize, Yaxons/side*masksize, masksize, masksize);
+end
 
-% mask2 : axon mask (without myelin)
-mask2 = createCirclesMask(pts', g.*D, side, resolution); mask2=double(mask2);
-mask_trunc2 = mask2(Xmin:Xmax,Ymin:Ymax);
-area2 = length(find(mask_trunc2==1));
+% masks trunc
+Ls = sqrt(sum(pi*(D+gap/2).^2))*(4/5)/side*masksize;
+Xmin = round(mean(pts(1,:))/side*masksize - Ls/2);
+Xmax = round(mean(pts(1,:))/side*masksize + Ls/2);
+Ymin = round(mean(pts(2,:))/side*masksize - Ls/2);
+Ymax = round(mean(pts(2,:))/side*masksize + Ls/2);
 
-% background sizes
-Lx = size(mask_trunc1,1);
-Ly = size(mask_trunc1,2);
+FVF_mask_trunc = FVF_mask(Xmin:Xmax,Ymin:Ymax);
+AVF_mask_trunc = AVF_mask(Xmin:Xmax,Ymin:Ymax);
+
+area1 = sum(FVF_mask_trunc(:));
+area0 = Ls*Ls - area1;
+area2 = sum(AVF_mask_trunc(:));
 
 % FVF
-FVF = area1 / (Lx*Ly); % = (AXON + myelin) / area
+FVF = area1 / (Ls*Ls); % = (AXON + myelin) / area
 
 % FR
 FR = area2 / (area2 + area0); % = AXON / (AXON + background)
 
 % AVF
-AVF = area2 / (Lx*Ly); % = AXON / area
+AVF = area2 / (Ls*Ls); % = AXON / area
 
 % MVF
-MVF = (area1 - area2) / (Lx*Ly); % = myelin / area
+MVF = (area1 - area2) / (Ls*Ls); % = myelin / area
 
 end
 
@@ -53,24 +64,5 @@ g = 0.220 .* log10(2*R) + 0.508;
 % figure
 % plot(2.*R, g)
 
-end
-
-function mask = createCirclesMask(varargin)
-% Create a binary mask from circle centers and radii
-
-centers = varargin{1};
-radi = varargin{2};
-side = varargin{3};
-M = varargin{4};
-
-xc = centers(:,1);
-yc = centers(:,2);
-
-[xx,yy] = meshgrid(1:M,1:M);
-
-mask = false(M,M);
-for i = 1:numel(radi)
-	mask = mask | hypot(xx - xc(i)*M/side, yy - yc(i)*M/side) <= radi(i)*M/side;
-end
 end
 

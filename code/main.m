@@ -4,19 +4,19 @@ close all
 clear variables
 clc
 
-% addpath('... path for other scripts ...')
+% addpath('... path to the code folder ...')
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CHANGE BELOW : AXONS FEATURES and ITERmax
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-numberAxons = 50;                                            % number of axons
+numberAxons = 100;                                           % number of axons 
 mean_theoretical = 3;                                        % theoretical mean of axon radii in um
 var_theoretical  = 1;                                        % theoretical variances of axon radii in um
-gap_theoretical  = 0.1;                                        % gap between axons in um 
+gap_theoretical  = 0;                                        % gap between axons in um 
 threshold_high = 10;                                         % no diameter above 'threshold_high'
 threshold_low = 0.2;                                         % no diameter under 'threshold_low'
-ITERmax = 3000;                                             % number of iteration i.e migrations to perform. Example: ITERmax = 30000 ok if N = 1000
-ITERfvf = 100;                                              % the disk density i.e Fiber Volume Fraction (FVF) is computed and displayed every 'ITERfvf' iterations
+ITERmax = 20000;                                             % number of iteration i.e migrations to perform. Example: ITERmax = 30000 ok if numberAxons = 1000
+ITERfvf = 1000;                                              % the disk density i.e Fiber Volume Fraction (FVF) is computed and displayed every 'ITERfvf' iterations
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 for k=1:length(mean_theoretical)
@@ -65,13 +65,13 @@ end
 % save_mean = num2str(mean_theoretical); save_mean(save_mean == ' ') = '';
 % save_gap  = num2str(gap_theoretical);  save_gap(save_gap == ' ') = '';
 % save_iter  = num2str(ITERmax);
-% saveName  = ['Axons', num2str(N), '_Mean', save_mean, '_Var', save_var, '_Gap', save_gap, '_Iter',save_iter]
+% saveName  = ['Axons', num2str(numberAxons), '_Mean', save_mean, '_Var', save_var, '_Gap', save_gap, '_Iter',save_iter]
 % mkdir('... path for saving ...', saveName)
 % 
 % cd(['... path ...',saveName])
 % save('axons.mat', '-struct', 'axons');
 % save('packing.mat', '-struct', 'packing');
-% save('stats.mat', '-struct', 'statistics');
+% save('stats.mat', '-struct', 'stats');
 
 
 

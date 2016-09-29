@@ -7,7 +7,11 @@ D = samplingHastingsMetropolis(axons, lawname, k);
 
 % dimension of the square area
 N = axons.numberAxons{k};
-side = sqrt(N*(2*max(D(:))+axons.gap_theoretical{k}).^2);
+if  axons.var_theoretical{k} == 0
+    side = sqrt(N*(3*max(D(:))+axons.gap_theoretical{k}).^2);
+else
+    side = sqrt(N*(2*max(D(:))+axons.gap_theoretical{k}).^2);
+end
 
 % Random positions on a grid for the N axons
 sqrt_N = round(sqrt(N))+1;
