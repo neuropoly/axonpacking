@@ -1,5 +1,5 @@
 
-# AxonPacking - Application to the simulation of White Matter microstructure
+# AxonPacking: Simulator of White Matter microstructure
 
 author : Tom Mingasson    
 contact : tom.mingasson@eleves.ec-nantes.fr          
