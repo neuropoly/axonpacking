@@ -1,9 +1,9 @@
 
-# AxonPack - Application to the simulation of White Matter microstructure
+# AxonPacking - Application to the simulation of White Matter microstructure
 
 author : Tom Mingasson    
 contact : tom.mingasson@eleves.ec-nantes.fr          
-institution : University Polytechnique of Montreal, NeuroPoly   
+institution : University Polytechnique Montreal, NeuroPoly   
 date : 2016 
 
 <img src="https://github.com/neuropoly/axonpacking/blob/master/img1.jpeg" width="800px" align="center" />
