@@ -59,6 +59,7 @@ for k=1:length(mean_theoretical)
     
 end
 
+stats
 
 %% save results
 % save_var  = num2str(var_theoretical);  save_var(save_var == ' ') = '';
