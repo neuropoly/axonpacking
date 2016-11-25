@@ -19,7 +19,7 @@ The different steps to process packing are the following: first, the diameters o
 
 The software packing provides microstructure features (Fiber Volume Fraction FVF, Myelin Volume Fraction MVF, Axon Volume Fraction AVF, fraction restricted FR).
 
-<img src="https://github.com/neuropoly/axonpacking/blob/master/img2.jpeg" width="1000px" align="middle" />
+<img src="https://github.com/neuropoly/axonpacking/blob/master/img2.png" width="1000px" align="middle" />
 
 ## Scripts
 
