@@ -1,5 +1,5 @@
 
-# AxonPacking: Simulator of White Matter microstructure
+# AxonPacking: Simulator of White Matter Axons Arrangement
 
 author : Tom Mingasson    
 contact : tom.mingasson@eleves.ec-nantes.fr          
@@ -14,7 +14,7 @@ Here is  a new random disks packing algorithm for numerical simulation of the wh
 
 White matter tissue is divided in three compartments:  axons, myelin sheath and extra-axonal space. Axons are assumed to be parallel cylinders, therefore the invariance along the fiber axis makes it possible to consider this problem in 2D. The dense packing of axons is thus equivalent to the generation of random 2-dimensional packing of N perfectly round and non-compressible disks. Axon diameter distributions follow a Gamma distribution (defined by its mean µ and variance σ2). Interestingly the g-ratio is fairly constant across species and white matter regions (31,32) and is dependent mostly on the diameter of the axon according to the relationship presented in (Ikeda M, Oka Y. Brain Behav. 2012):  gratio= 0.220 * log(DIAMETER_unmyelinated) +0.508. 
 
-The different steps to process packing are the following: first, the diameters of the disks are randomly chosen using a gamma distribution parameterized with the mean (µ), standard deviation (σ) and number of axons (N).  Then, the positions of disks are initialized on a grid, and they migrate toward the center of the packing area until the maximum disk density is achieved. 
+The different steps to process packing are the following: first, the diameters of the disks are randomly chosen using a gamma or lognormal distribution parameterized with the mean (d_mean), variance (d_var) and number of axons (N).  Then, the positions of disks are initialized on a grid, and they migrate toward the center of the packing area until the maximum disk density is achieved. 
 
 
 The software packing provides microstructure features (Fiber Volume Fraction FVF, Myelin Volume Fraction MVF, Axon Volume Fraction AVF, fraction restricted FR).
@@ -24,9 +24,10 @@ The software packing provides microstructure features (Fiber Volume Fraction FVF
 ## Scripts
 
 main.m
-axonsSetup.m
-processPacking.m
-computeStatistics.m
+axons_setup.m
+process_packing.m
+compute_gratio.m
+compute_statistics.m
 progressBar.m
 
 ## How to use it ?
@@ -34,38 +35,32 @@ progressBar.m
 ### INPUTS
 In ‘main.m’ change the inputs
 
-- numberAxons        % number of axons (N)
-- mean_theoretical   % theoretical mean of axon diameters in um. Can be a vector if you want to create more than one packing.
-- var_theoretical    % theoretical variances of axon diameters in um. Has to be a correspond with the size of ‘mean_theoretical’.
-- gap_theoretical    % gap between axons in um 
-- threshold_high     % no diameter above 'threshold_high'
-- threshold_low      % no diameter under 'threshold_low'
-- ITERmax            % number of iteration i.e migrations to perform. Example: ITERmax = 30000 ok if N = 1000
-- ITERfvf            % the disk density i.e Fiber Volume Fraction (FVF) is computed and displayed every 'ITERfvf' iterations
+N : the number of disks i.e axons to include in the simulation
+d_mean and d_var : the diameter distribution parameters : mean µ and variance σ² of disk diameters 
+Delta : the fixed gap between the edge of disks Δ 
+iter_max : the number of iterations i.e disk migrations performed by the algorithm before computing the outputs 
 
 #### Help 	
+The disk density increases over the migrations and tends toward a limit value. It is necessary to first launch the algorithm with a high number of iterations iter_max. The disk density i.e FVF is calculated every 'iter_fvf' iterations to assess the sufficient number of iterations to reach convergence. 'iter_fvf' is a user defined integer: iter_fvf = iter_max/10 by default. 
 
-The disk density increases over the migrations and tends toward a limit value. It is necessary to first launch the algorithm with the packing inputs (N, µ, σ and Δ) and a high number of iterations. MRI metrics such as the disks density e.g. FVF can be calculated every p iterations to assess the sufficient number of iterations to reach a certain degree of precision. p is a user defined integer: p = 250 or 1000 for example. 
-
-When mean_theoretical (μ) closed to 3, var_theoretical (σ2) closed to 1 and numberAxons about 1000, ITERmax = 30000 is sufficient. 
-
+When d_mean closed to 3 um, d_var  closed to 1 um : 
+ - if N about 1000, iter_max = 30000 is sufficient. 
+ - if N about 100, iter_max = 10000 is sufficient. 
 
 #### Example  	
-numberAxons = 25;
-mean_theoretical = [3 3]; 
-var_theoretical  = [1 1];                    
-gap_theoretical  = [0 0.5];                                
-threshold_high = 10;                                     
-threshold_low = 0.2;                                         
-ITERmax = 30000;                       
-ITERfvf = 1000;                             
+N = 100;            
+d_mean = 3;         
+d_var  = 1;        
+Delta  = 0; 
+iter_max = 10000;                            
 
 ### OUPUTS
-The function ‘computeStatistics.m’ provides MVF, AVF, FVF and FR for each packing image defined by the input combinations. To do that it creates a binary masks
-from the packing image. The user can set the resolution of this mask. The default resolution is 2048. 
+The function ‘computeStatistics.m’ provides MVF, AVF, FVF and FR for each packing image defined by the input combinations. To do that it creates a binary mask.
 
-Outputs are stored in data structures. Data structures outputs :
-- in ‘axons.mat’ is stored : axon features (theoretical mean diameters, theoretical variance diameters, theoretical gap between axons, diameters threshold low and high, number of axons, set of the diameters after sampling).
-- in ‘packing.mat’ is stored : packing results (initial positions, final position, final overlap ratio in the paking, length of the packing area 'side' and ITERmax). 
-- in ‘stats.mat’ is stored : resolution, MVF, AVF, FVF, FR, g-ratio. 
+Outputs are stored in 3 matlab  structures. 
+
+in 'axons.mat' :  the axon features (N, d_mean, d_var, g_ratio and the drawn diameters d)
+in 'packing.mat' : the packing results (initial positions of disks (initial_positions) , gap between disks (Delta), final positions of disks (final_positions), final overlap between disks (final_overlap))
+in 'stats.mat' : the statistics results with the values for each metric computed in the packing (FVF, FR, MVF, AVF) 
+
 
