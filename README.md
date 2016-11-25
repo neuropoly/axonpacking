@@ -35,10 +35,10 @@ progressBar.m
 ### INPUTS
 In ‘main.m’ change the inputs
 
-N : the number of disks i.e axons to include in the simulation
-d_mean and d_var : the diameter distribution parameters : mean µ and variance σ² of disk diameters 
-Delta : the fixed gap between the edge of disks Δ 
-iter_max : the number of iterations i.e disk migrations performed by the algorithm before computing the outputs 
+- N : the number of disks i.e axons to include in the simulation
+- d_mean and d_var : the diameter distribution parameters : mean µ and variance σ² of disk diameters 
+- Delta : the fixed gap between the edge of disks Δ 
+- iter_max : the number of iterations i.e disk migrations performed by the algorithm before computing the outputs 
 
 #### Help 	
 The disk density increases over the migrations and tends toward a limit value. It is necessary to first launch the algorithm with a high number of iterations iter_max. The disk density i.e FVF is calculated every 'iter_fvf' iterations to assess the sufficient number of iterations to reach convergence. 'iter_fvf' is a user defined integer: iter_fvf = iter_max/10 by default. 
@@ -59,8 +59,8 @@ The function ‘computeStatistics.m’ provides MVF, AVF, FVF and FR for each pa
 
 Outputs are stored in 3 matlab  structures. 
 
-in 'axons.mat' :  the axon features (N, d_mean, d_var, g_ratio and the drawn diameters d)
-in 'packing.mat' : the packing results (initial positions of disks (initial_positions) , gap between disks (Delta), final positions of disks (final_positions), final overlap between disks (final_overlap))
-in 'stats.mat' : the statistics results with the values for each metric computed in the packing (FVF, FR, MVF, AVF) 
+- in 'axons.mat' :  the axon features (N, d_mean, d_var, g_ratio and the drawn diameters d)
+- in 'packing.mat' : the packing results (initial positions of disks (initial_positions) , gap between disks (Delta), final positions of disks (final_positions), final overlap between disks (final_overlap))
+- in 'stats.mat' : the statistics results with the values for each metric computed in the packing (FVF, FR, MVF, AVF) 
 
 
