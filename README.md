@@ -2,7 +2,7 @@
 # AxonPacking: Simulator of White Matter Axons Arrangement
 
 author : Tom Mingasson    
-contact : tom.mingasson@eleves.ec-nantes.fr          
+contact : mingasson.tom@gmail.com       
 institution : University Polytechnique Montreal, NeuroPoly   
 date : 2016 
 
