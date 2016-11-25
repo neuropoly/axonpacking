@@ -23,12 +23,12 @@ The software packing provides microstructure features (Fiber Volume Fraction FVF
 
 ## Scripts
 
-main.m
-axons_setup.m
-process_packing.m
-compute_gratio.m
-compute_statistics.m
-progressBar.m
+- main.m
+- axons_setup.m
+- process_packing.m
+- compute_gratio.m
+- compute_statistics.m
+- progressBar.m
 
 ## How to use it ?
 
