@@ -17,7 +17,7 @@ Ls = sqrt(sum(pi*(d+gap/2).^2))*(4/5);
 resolution = 0.05; % um
 
 % resulting mask size
-masksize = ceil(Ls/resolution);
+masksize = ceil(side/resolution);
 
 % FVF mask
 FVF_mask = false(masksize);
