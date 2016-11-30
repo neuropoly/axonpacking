@@ -15,6 +15,7 @@ Ls = sqrt(sum(pi*(d+gap/2).^2))*(4/5);
 
 % resolution in the mask
 resolution = 0.05; % um
+disp(['pixel size : ', num2str(resolution), 'micro meters'])
 
 % resulting mask size
 masksize = ceil(side/resolution);
