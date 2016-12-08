@@ -57,10 +57,10 @@ iter_max = 10000;
 ### OUPUTS
 The function ‘computeStatistics.m’ provides MVF, AVF, FVF and FR for each packing image defined by the input combinations. To do that it creates a binary mask.
 
-Outputs are stored in 3 matlab  structures. 
+Outputs are stored in 3 matlab structures. 
 
-- in 'axons.mat' :  the axon features (N, d_mean, d_var, g_ratio and the drawn diameters d)
-- in 'packing.mat' : the packing results (initial positions of disks (initial_positions) , gap between disks (Delta), final positions of disks (final_positions), final overlap between disks (final_overlap))
+- in 'axons.mat' :  the axon features (N, d_mean, d_var, Delta, g_ratio and the drawn diameters d)
+- in 'packing.mat' : the packing results (initial positions of disks (initial_positions) and final positions of disks (final_positions))
 - in 'stats.mat' : the statistics results with the values for each metric computed in the packing (FVF, FR, MVF, AVF) 
 
-
+A png image of the final packing with three different labels (intra-axonal, myelin and extra-axonal) is saved by default in the current script folder.
