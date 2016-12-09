@@ -23,7 +23,8 @@ for iter = 1:iter_max
         t = 0:.1:2*pi+0.1;
         
         % FVF mask
-        masksize = ceil(3000*sqrt(N)/sqrt(500));
+        resolution = 0.05; % um
+        masksize = ceil(side/resolution);
         FVF_mask = false(masksize);
         for id=1:N
             Xfibers = d(id)*cos(t) + pts(1,id);
@@ -60,7 +61,7 @@ for iter = 1:iter_max
         axis off
         hold on
         rectangle('Position',[Xmin, Ymin, Ls, Ls],'EdgeColor', 'r', 'LineWidth', 1.5)
-        title(['Diam Mean : ',num2str(round(mean(d(:))*10)/10),' µm    ','Diam Var : ',num2str(round(var(d(:))*10)/10),' µm    ','Gap : ',num2str(gap),' µm    '],'FontSize',10,'FontWeight','bold');
+        title(['Diam Mean : ',num2str(round(mean(d(:))*10)/10),' Âµm    ','Diam Var : ',num2str(round(var(d(:))*10)/10),' Âµm    ','Gap : ',num2str(gap),' Âµm    '],'FontSize',10,'FontWeight','bold');
         axis square
         
         subplot(1,2,2)
