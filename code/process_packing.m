@@ -61,7 +61,7 @@ for iter = 1:iter_max
         axis off
         hold on
         rectangle('Position',[Xmin, Ymin, Ls, Ls],'EdgeColor', 'r', 'LineWidth', 1.5)
-        title(['Diam Mean : ',num2str(round(mean(d(:))*10)/10),' µm    ','Diam Var : ',num2str(round(var(d(:))*10)/10),' µm    ','Gap : ',num2str(gap),' µm    '],'FontSize',10,'FontWeight','bold');
+        title(['Diam Mean : ',num2str(round(mean(d(:))*10)/10),' um    ','Diam Var : ',num2str(round(var(d(:))*10)/10),' um    ','Gap : ',num2str(gap),' um    '],'FontSize',10,'FontWeight','bold');
         axis square
         
         subplot(1,2,2)
