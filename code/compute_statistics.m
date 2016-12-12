@@ -39,7 +39,7 @@ end
 
 % size of the mask from which metrics are computed. Its area is Atot = Ls * Ls
 Ls = sqrt(sum(pi*(d+gap/2).^2))*(4/5)/side*masksize;
-Atot = (Ls/side*masksize)^2;
+Atot = Ls^2;
 
 % center of the mask
 Xmin = round(mean(pts(1,:))/side*masksize - Ls/2);
