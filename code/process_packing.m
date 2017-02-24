@@ -53,23 +53,23 @@ for iter = 1:iter_max
         fvf_historic = [fvf_historic sum(FVF_mask_trunc(:))/ Atot];
         
         % display intermediate packing and compute FVF
-        set(figure(201), 'Name', 'Disk migration'); clf
+%         set(figure(201), 'Name', 'Disk migration'); clf
         
-        subplot(1,2,1)
-        colormap(gray)
-        imagesc(AVF_mask - FVF_mask)
-        axis off
-        hold on
-        rectangle('Position',[Xmin, Ymin, Ls, Ls],'EdgeColor', 'r', 'LineWidth', 1.5)
-        title(['Diam Mean : ',num2str(round(mean(d(:))*10)/10),' um    ','Diam Var : ',num2str(round(var(d(:))*10)/10),' um    ','Gap : ',num2str(gap),' um    '],'FontSize',10,'FontWeight','bold');
-        axis square
-        
-        subplot(1,2,2)
-        plot([1:length(fvf_historic)]*iter_fvf, fvf_historic, 'r*-')
-        title('Disk density in the red square' ,'FontSize',10,'FontWeight','bold');
-        axis square
-        
-        drawnow
+%         subplot(1,2,1)
+%         colormap(gray)
+%         imagesc(AVF_mask - FVF_mask)
+%         axis off
+%         hold on
+%         rectangle('Position',[Xmin, Ymin, Ls, Ls],'EdgeColor', 'r', 'LineWidth', 1.5)
+%         title(['Diam Mean : ',num2str(round(mean(d(:))*10)/10),' um    ','Diam Var : ',num2str(round(var(d(:))*10)/10),' um    ','Gap : ',num2str(gap),' um    '],'FontSize',10,'FontWeight','bold');
+%         axis square
+%         
+%         subplot(1,2,2)
+%         plot([1:length(fvf_historic)]*iter_fvf, fvf_historic, 'r*-')
+%         title('Disk density in the red square' ,'FontSize',10,'FontWeight','bold');
+%         axis square
+%         
+%         drawnow
 
     end
     

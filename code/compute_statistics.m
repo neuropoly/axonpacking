@@ -1,4 +1,4 @@
-function [FVF, FR, MVF, AVF] = compute_statistics( d, gap, pts, side, g_ratio)
+function [FVF, FR, MVF, AVF, AVF_mask, FVF_mask] = compute_statistics( d, gap, pts, side, g_ratio)
 % % author : Tom Mingasson
 % stat evaluate from the results of the simulation :
 %       - FVF : the fiber volume fraction e.g. the axon (=disk) density

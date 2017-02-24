@@ -56,7 +56,7 @@ for k=1:length(d_mean)
     packing.iter_max{k}             = iter_max;
     
     % Statistics from the packing
-    [FVF, FR, MVF, AVF] = compute_statistics(axons.d{k}, axons.Delta{k}, packing.final_positions{k}, side, axons.g_ratio{k});
+    [FVF, FR, MVF, AVF, AVF_mask,FVF_mask] = compute_statistics(axons.d{k}, axons.Delta{k}, packing.final_positions{k}, side, axons.g_ratio{k});
     
     % store stats results
     stats.FVF{k}        = FVF;
@@ -74,10 +74,10 @@ save_var = num2str(d_var);  save_var(save_var == ' ') = '';
 save_mean = num2str(d_mean); save_mean(save_mean == ' ') = '';
 save_Delta  = num2str(Delta);  save_Delta(save_Delta == ' ') = '';
 save_iter  = num2str(iter_max);
-saveName  = ['Axons', num2str(N), '_Mean', save_mean, '_Var', save_var, '_Delta', save_Delta, '_Iter',save_iter]
+saveName  = ['Axons', num2str(N), '_Mean', save_mean, '_Var', save_var, '_Delta', save_Delta, '_Iter',save_iter];
 
 mkdir('results')
-cd([pwd,'\results'])
+cd([pwd,'/results'])
 
 % save outputs
 save('axons.mat', '-struct', 'axons');
