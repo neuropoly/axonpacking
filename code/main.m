@@ -17,7 +17,7 @@ N = 100;            % number of axons i.e disks to pack
 d_mean = 3;         % theoretical mean of axon diameters in um
 d_var  = 1;         % theoretical variance of axon diameters in um
 Delta  = 0;         % gap between the edge of axons in um 
-iter_max = 8000;    % number of iteration i.e migrations to perform. Example: iter_max = 30000 ok if N = 1000
+iter_max = 2000;    % number of iteration i.e migrations to perform. Example: iter_max = 30000 ok if N = 1000
 
 % SECONDARY INPUTS
 threshold_high = 10;     % no diameter above 'threshold_high'
@@ -74,10 +74,10 @@ save_var = num2str(d_var);  save_var(save_var == ' ') = '';
 save_mean = num2str(d_mean); save_mean(save_mean == ' ') = '';
 save_Delta  = num2str(Delta);  save_Delta(save_Delta == ' ') = '';
 save_iter  = num2str(iter_max);
-saveName  = ['Axons', num2str(N), '_Mean', save_mean, '_Var', save_var, '_Delta', save_Delta, '_Iter',save_iter]
+saveName  = ['Axons', num2str(N), '_Mean', save_mean, '_Var', save_var, '_Delta', save_Delta, '_Iter',save_iter];
 
 mkdir('results')
-cd([pwd,'\results'])
+cd([pwd,filesep, 'results'])
 
 % save outputs
 save('axons.mat', '-struct', 'axons');
