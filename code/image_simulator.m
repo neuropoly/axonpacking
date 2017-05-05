@@ -1,15 +1,15 @@
 
 %% Specify simulation inputs
 
-sim_params.N=100;            % number of axons i.e disks to pack  
-sim_params.d_mean=4;         % theoretical mean of axon diameters in um
+sim_params.N=300;            % number of axons i.e disks to pack  
+sim_params.d_mean=5;         % theoretical mean of axon diameters in um
 sim_params.d_var=1;         % theoretical variance of axon diameters in um
-sim_params.Delta=1;         % gap between the edge of axons in um 
-sim_params.iter_max=8000;    % number of iteration i.e migrations to perform. Example: iter_max = 30000 ok if N = 1000
+sim_params.Delta=0.8;         % gap between the edge of axons in um 
+sim_params.iter_max=10000;    % number of iteration i.e migrations to perform. Example: iter_max = 30000 ok if N = 1000
 
 % SECONDARY INPUTS
 sim_params.threshold_high=10;     % no diameter above 'threshold_high'
-sim_params.threshold_low=0.2;     % no diameter under 'threshold_low'
+sim_params.threshold_low=0.4;     % no diameter under 'threshold_low'
 sim_params.iter_fvf=sim_params.iter_max/10; 
 
 %% Simulate distribution & get axon (AVF) and fiber (FVF) masks
@@ -24,7 +24,7 @@ simulation_properties.background_value=150;
 
 %% Generate image
 
-[img,groundtruth]=generate_img(FVF_mask,AVF_mask,simulation_properties,sim_params);
+[img,groundtruth_axon,groundtruth_myelin,groundtruth_combined]=generate_img(FVF_mask,AVF_mask,simulation_properties,sim_params);
 imshow(img);
 imshow(groundtruth);
 
