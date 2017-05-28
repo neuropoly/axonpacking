@@ -17,7 +17,7 @@ N = 100;            % number of axons i.e disks to pack
 d_mean = 3;         % theoretical mean of axon diameters in um
 d_var  = 1;         % theoretical variance of axon diameters in um
 Delta  = 0;         % gap between the edge of axons in um 
-iter_max = 2000;    % number of iteration i.e migrations to perform. Example: iter_max = 30000 ok if N = 1000
+iter_max = 10000;    % number of iteration i.e migrations to perform. Example: iter_max = 30000 ok if N = 1000
 
 % SECONDARY INPUTS
 threshold_high = 10;     % no diameter above 'threshold_high'
