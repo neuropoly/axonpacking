@@ -8,6 +8,9 @@ date : 2016
 
 <img src="https://github.com/neuropoly/axonpacking/blob/master/img1.jpeg" width="800px" align="center" />
 
+If you use this software, please cite:
+> Mingasson T, Duval T, Stikov N, Cohen-Adad J. AxonPacking: An open-source software to simulate arrangements of axons in white matter. Front Neuroinform. 2017 Jan 31;11:5.
+
 ## Description 
 
 Here is  a new random disks packing algorithm for numerical simulation of the white matter. 
